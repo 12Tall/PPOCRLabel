@@ -789,21 +789,40 @@ class Canvas(QWidget):
             select_shape = self.selectedShapes[0]
             select_shape.highlightClear()
             self.update()
+            
+        elif key == Qt.Key_Z and self.selectedShapes:
+            for i in range(len(self.selectedShapes)):
+                self.selectedShape = self.selectedShapes[i]
+                if self.rotateOutOfBound(0.5):
+                    continue
+                self.selectedShape.rotate(0.5)
+            self.shapeMoved.emit()
+            self.update()
+        
         elif key == Qt.Key_X and self.selectedShapes:
             for i in range(len(self.selectedShapes)):
                 self.selectedShape = self.selectedShapes[i]
-                if self.rotateOutOfBound(1):
+                if self.rotateOutOfBound(0.01):
                     continue
-                self.selectedShape.rotate(1)
+                self.selectedShape.rotate(0.01)
             self.shapeMoved.emit()
             self.update()
 
         elif key == Qt.Key_C and self.selectedShapes:
             for i in range(len(self.selectedShapes)):
                 self.selectedShape = self.selectedShapes[i]
-                if self.rotateOutOfBound(-1):
+                if self.rotateOutOfBound(-0.01):
                     continue
-                self.selectedShape.rotate(-1)
+                self.selectedShape.rotate(-0.01)
+            self.shapeMoved.emit()
+            self.update()
+
+        elif key == Qt.Key_V and self.selectedShapes:
+            for i in range(len(self.selectedShapes)):
+                self.selectedShape = self.selectedShapes[i]
+                if self.rotateOutOfBound(-0.5):
+                    continue
+                self.selectedShape.rotate(-0.5)
             self.shapeMoved.emit()
             self.update()
 
