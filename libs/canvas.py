@@ -756,35 +756,35 @@ class Canvas(QWidget):
             self.moveOnePixel("Up")
         elif key == Qt.Key_Down and self.selectedShapes:
             self.moveOnePixel("Down")
-        elif key == Qt.Key_Z and self.selectedShapes:
+        elif key == Qt.Key_Z and self.selectedShapes and ev.modifiers() == Qt.ShiftModifier:
             self.shape_move_index = 0
             select_shape = self.selectedShapes[0]
             select_shape.highlightVertex(
                 self.shape_move_index, select_shape.MOVE_VERTEX
             )
             self.update()
-        elif key == Qt.Key_X and self.selectedShapes:
+        elif key == Qt.Key_X and self.selectedShapes and ev.modifiers() == Qt.ShiftModifier:
             self.shape_move_index = 1
             select_shape = self.selectedShapes[0]
             select_shape.highlightVertex(
                 self.shape_move_index, select_shape.MOVE_VERTEX
             )
             self.update()
-        elif key == Qt.Key_C and self.selectedShapes:
+        elif key == Qt.Key_C and self.selectedShapes and ev.modifiers() == Qt.ShiftModifier:
             self.shape_move_index = 2
             select_shape = self.selectedShapes[0]
             select_shape.highlightVertex(
                 self.shape_move_index, select_shape.MOVE_VERTEX
             )
             self.update()
-        elif key == Qt.Key_V and self.selectedShapes:
+        elif key == Qt.Key_V and self.selectedShapes and ev.modifiers() == Qt.ShiftModifier:
             self.shape_move_index = 3
             select_shape = self.selectedShapes[0]
             select_shape.highlightVertex(
                 self.shape_move_index, select_shape.MOVE_VERTEX
             )
             self.update()
-        elif key == Qt.Key_B and self.selectedShapes:
+        elif key == Qt.Key_B and self.selectedShapes and ev.modifiers() == Qt.ShiftModifier:
             self.shape_move_index = None
             select_shape = self.selectedShapes[0]
             select_shape.highlightClear()
@@ -792,18 +792,18 @@ class Canvas(QWidget):
         elif key == Qt.Key_X and self.selectedShapes:
             for i in range(len(self.selectedShapes)):
                 self.selectedShape = self.selectedShapes[i]
-                if self.rotateOutOfBound(0.01):
+                if self.rotateOutOfBound(1):
                     continue
-                self.selectedShape.rotate(0.01)
+                self.selectedShape.rotate(1)
             self.shapeMoved.emit()
             self.update()
 
         elif key == Qt.Key_C and self.selectedShapes:
             for i in range(len(self.selectedShapes)):
                 self.selectedShape = self.selectedShapes[i]
-                if self.rotateOutOfBound(-0.01):
+                if self.rotateOutOfBound(-1):
                     continue
-                self.selectedShape.rotate(-0.01)
+                self.selectedShape.rotate(-1)
             self.shapeMoved.emit()
             self.update()
 
